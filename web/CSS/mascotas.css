@@ -1,0 +1,57 @@
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.tarjeta {
+    background-color: var(--gris_claro);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.imagen-mascota {
+    width: 100%; /* Ocupar el ancho completo del contenedor */
+    height: 200px; /* Altura fija para mantener proporciones */
+    max-width: 300px; /* Tamaño máximo horizontal */
+    max-height: 300px; /* Tamaño máximo vertical */
+    object-fit: cover; /* Recorta las imágenes manteniendo el formato 1:1 */
+    border-radius: 10px; /* Bordes redondeados opcionales */
+    display: block;
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+
+.contenido-tarjeta {
+    padding: 1rem;
+}
+
+.contenido-tarjeta h3 {
+    margin-top: 0;
+    color: var(--cafe_gris);
+}
+
+.contenido-tarjeta p {
+    margin: 0.5rem 0;
+    color: var(--gris_oscuro);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--cafe_claro);
+    color: var(--gris_oscuro);
+    margin-top: 2rem;
+}

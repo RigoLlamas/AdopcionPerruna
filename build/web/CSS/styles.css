@@ -1,0 +1,174 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 24 nov. 2024, 19:41:32
+    Author     : Rigo
+*/
+
+:root{
+    --cafe_oscuro: #6f4e37;
+    --cafe_claro:#a5886f;
+    --cafe_gris:#4e433f;
+    --gris_claro:#f7f3ec;
+    --gris_oscuro:#4a4a4a;
+    --fondo:#fffaf2;
+    --borde:#d1c4b6;
+}
+
+/* Estilo global */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--gris_claro); /* Fondo gris claro */
+    color: #4a4a4a; /* Texto gris oscuro */
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedores */
+.contenedor {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: var(--fondo); /* Fondo blanco con un toque de café claro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid var(--borde); /* Borde gris/café claro */
+}
+
+/* Títulos */
+h1, h2 {
+    color: var(--cafe_oscuro);
+    text-align: center;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    color: var(--cafe_gris); /* Gris café */
+}
+
+input[type="email"],
+input[type="password"],
+button {
+    padding: 10px;
+    border: 1px solid var(--borde); /* Borde gris/café claro */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: var(--fondo); /* Fondo gris claro */
+    color: var(--cafe_gris); /* Texto gris café */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--cafe_claro); /* Café claro */
+    box-shadow: 0 0 5px #a5886f;
+}
+
+/* Botón */
+button {
+    background-color: var(--cafe_claro); /* Café claro */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--cafe_oscuro); /* Café oscuro */
+}
+
+/* Mensajes de error */
+.error {
+    color: #b22222; /* Rojo oscuro */
+    background-color: #ffe8e8; /* Fondo rosado claro */
+    border: 1px solid #f5c2c2; /* Borde rojo claro */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Enlaces */
+a {
+    color: var(--cafe_oscuro);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--cafe_gris);
+    font-size: 14px;
+}
+
+.barra_navegacion{
+    background-color: var(--cafe_oscuro); /* Fondo oscuro para el menú */
+    color: var(--gris_claro); /* Color de texto claro */
+    padding: 1rem; /* Espaciado interno */
+    border-bottom: 1px solid var(--borde); /* Línea separadora */
+    display: flex; /* Barra horizontal */
+    flex-direction: column; /* Vertical para los elementos del título */
+    align-items: center; /* Alineación al inicio */
+}
+
+.barra_navegacion h1 {
+    color: var(--gris_claro); /* Título con color claro */
+}
+
+.barra_navegacion p {
+    color: var(--gris_claro);
+    margin: 0.5rem 0 1rem;
+    font-size: 0.9rem; /* Tamaño de texto reducido */
+}
+
+.barra_navegacion ul {
+    list-style: none; /* Sin viñetas */
+    display: flex; /* Los enlaces se alinean horizontalmente */
+    gap: 1rem; /* Separación entre los enlaces */
+    padding: 0;
+    margin: auto;
+}
+
+.barra_navegacion ul li {
+    margin: auto; /* Elimina márgenes extra */
+}
+
+.barra_navegacion ul li a {
+    text-decoration: none; /* Sin subrayado */
+    color: var(--gris_claro); /* Texto claro */
+    background-color: var(--cafe_gris); /* Fondo gris oscuro */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.barra_navegacion ul li a:hover {
+    background-color: var(--cafe_claro); 
+    color: var(--gris_oscuro); 
+}
+
+.barra_navegacion ul li a:active {
+    background-color: var(--gris_claro); /* Fondo claro al hacer clic */
+    color: var(--cafe_gris); /* Texto oscuro */
+}
+
