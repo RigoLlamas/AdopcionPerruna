@@ -65,6 +65,22 @@
     <div id="lista" style="display: none;">
         <h2>Mascotas disponibles para adopción</h2>
         <div class="tarjetas">
+            <%if ("Administrador".equals(tipo)) { %>
+                
+            <form action="agregar_mascota.jsp" method="POST">
+                <button type="submit" class="tarjeta-boton">
+                    <div class="tarjeta agregar-mascota">
+                        <img src="IMAGENES/default.png" alt="Agregar Mascota" class="imagen-mascota">
+                        <div class="contenido-tarjeta">
+                            <h3>Agregar Nueva Mascota</h3>
+                            <p>Click aquí para agregar una nueva mascota al sistema.</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+            
+            <% } %>
+            
             <%
                 ArrayList<Mascotas> listaMascotas = (ArrayList<Mascotas>) request.getAttribute("listaMascotas");
 
@@ -80,7 +96,8 @@
                     confirmButtonText: 'Aceptar'
                 });
             </script>
-            <form action="solicitud_adopcion.jsp" method="get" class="tarjeta-form">
+            
+            <form action="solicitud_adopcion.jsp" method="get">
                 <input type="hidden" name="Mascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
                     <div class="tarjeta">
@@ -111,7 +128,7 @@
                     confirmButtonText: 'Aceptar'
                 });
             </script>
-            <form action="ModificarMascotaServlet" method="GET" class="tarjeta-form">
+            <form action="ModificarMascotaServlet" method="GET">
                 <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
                     <div class="tarjeta">

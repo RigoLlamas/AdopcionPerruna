@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/src/java/bd/Adopciones.java</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/src/java/servlets/ModificarMascotaServlet.java</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/src/java/servlets/AgregarMascotaServlet.java</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/web/modificar_mascota.jsp</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/src/java/servlets/LoginServlet.java</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/src/java/bd/MascotasDAO.java</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/web/agregar_mascota.jsp</file>
+            <file>file:/D:/CETI/8vo/Programacion_Avanzada_ll/TercerParcial/AdopcionPerruna/web/index.jsp</file>
+        </group>
     </open-files>
 </project-private>

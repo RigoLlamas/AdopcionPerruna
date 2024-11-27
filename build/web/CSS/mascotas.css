@@ -5,11 +5,13 @@
     justify-content: center;
 }
 
+
 .tarjeta {
     background-color: var(--gris_claro);
     border: 1px solid var(--borde);
     border-radius: 10px;
     width: 300px;
+    height: 426.72px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
@@ -54,4 +56,19 @@ footer {
     background-color: var(--cafe_claro);
     color: var(--gris_oscuro);
     margin-top: 2rem;
+}
+
+.agregar-mascota {
+    background-color: var(--fondo);
+    border: 2px dashed var(--cafe_claro);
+}
+
+.agregar-mascota .contenido-tarjeta h3 {
+    text-align: center;
+    color: var(--cafe_claro);
+}
+
+.agregar-mascota .contenido-tarjeta p {
+    text-align: center;
+    color: var(--gris_oscuro);
 }
