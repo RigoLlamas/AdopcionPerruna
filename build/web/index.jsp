@@ -51,18 +51,8 @@
                     confirmButtonText: 'Aceptar'
                 });
             </script>
-<<<<<<< HEAD
             
-            <form action="solicitud.jsp">
-                <input type="hidden" name="Mascota" value="<%= mascota.getPk_mascota()%>">
-                <button type="submit" class="tarjeta-boton">
-                    <div class="tarjeta">
-                        <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
-                                ? mascota.getImagen()
-                                : "IMAGENES/default.png"%>" 
-                             alt="<%= mascota.getNombre()%>" 
-=======
-            <div class="error-message">
+            
                 <%= errorMessage%>
             </div>
             <% } %>
@@ -139,23 +129,20 @@
                 </script>
 
                 <% }%>
+                
+                
+                             
+                             
 
-                <form action="solicitud_adopcion.jsp" method="get">
-                    <input type="hidden" name="Mascota"
-                           value="<%= mascota.getPk_mascota()%>">
-                    <button type="submit" class="tarjeta-boton">
-                        <div class="tarjeta">
-                            <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
-                                    ? mascota.getImagen()
-                                    : " IMAGENES/default.png"%>"
-                                 alt="<%= mascota.getNombre()%>"
+                <form action="solicitud.jsp">
+                <input type="hidden" name="Mascota" value="<%= mascota.getPk_mascota()%>">
+                <button type="submit" class="tarjeta-boton">
+                    <div class="tarjeta">
+                        <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
+                                ? mascota.getImagen()
+                                : "IMAGENES/default.png"%>" 
+                             alt="<%= mascota.getNombre()%>" 
                                  class="imagen-mascota">
-                             <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
-                                                                    ? mascota.getImagen()
-                                                                    : " IMAGENES/default.png"%>"
-                             alt="<%= mascota.getNombre()%>"
->>>>>>> 407de85d65dbc4a2893073ec610e66f2f7925ebe
-                             class="imagen-mascota">
 
                             <div class="contenido-tarjeta">
                                 <h3><%= mascota.getNombre()%></h3>

@@ -19,8 +19,7 @@
         <li><a href="index.jsp">Ver Mascotas</a></li>
         <li><a href="peticiones.jsp">Mis Peticiones</a></li>
         <li><a href="citas.jsp">Mis Citas</a></li>
-        <li><a href="#">Citas</a></li>
-        <li><a href="SvCerrarSesion">Cerrar Sesi�n</a></li>            
+        <li><a href="SvCerrarSesion">Cerrar Sesion</a></li>            
             <%
                 }
             %>
