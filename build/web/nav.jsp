@@ -12,13 +12,13 @@
             %>
             <li><a href="#">Mascotas</a></li>
             <li><a href="peticiones.jsp">Peticiones</a></li>
-            <li><a href="#">Citas</a></li>
+            <li><a href="citas.jsp">Citas</a></li>
                 <%
                 } else if ("Usuario".equals(tipo)) {
                 %>
             <li><a href="index.jsp">Ver Mascotas</a></li>
             <li><a href="peticiones.jsp">Mis Peticiones</a></li>
-            <li><a href="#">Mis Citas</a></li>
+            <li><a href="citas.jsp">Mis Citas</a></li>
                 <%
                     }
                 %>

@@ -56,6 +56,44 @@ public class CitasDAO extends Adopciones {
         }
         return citas;
     }
+    
+    public ArrayList<Citas> select_from_usr(int pk_user) {
+        ArrayList<Citas> citas = new ArrayList<>();
+        try {
+            PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM `citas` WHERE FK_Solicitud = (SELECT PK_Solicitud FROM solicitudesadopcion WHERE FK_Usuario = ?);");
+            ps.setInt(1, pk_user);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("Consulta realizada");
+            while (rs.next()) {
+                Citas cita = new Citas();
+                cita.setPk_cita(rs.getInt("PK_Cita"));
+                cita.setFk_solicitud(rs.getInt("FK_Solicitud"));
+                cita.setFechaCita(rs.getTimestamp("FechaCita").toLocalDateTime());
+                cita.setEstadoCita(rs.getString("EstadoCita"));
+                cita.setNotas(rs.getString("Notas"));
+                citas.add(cita);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al realizar la consulta: " + e.getMessage());
+        }
+        return citas;
+    }
+    
+    public int getUserFromCita(int pk_cita){
+        int pk_user = 0;
+        try {
+            PreparedStatement ps = getConnection().prepareStatement("SELECT solicitudesadopcion.FK_Usuario FROM solicitudesadopcion, citas WHERE solicitudesadopcion.PK_Solicitud = ? AND citas.FK_Solicitud = solicitudesadopcion.PK_Solicitud;");
+            ps.setInt(1, pk_cita);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("Consulta realizada");
+            while (rs.next()) {
+                pk_user = rs.getInt("FK_Usuario");
+            }
+        } catch (Exception e) {
+            System.err.println("Error al realizar la consulta: " + e.getMessage());
+        }
+        return pk_user;
+    }
 
     public void update(Citas cita) {
         try {
