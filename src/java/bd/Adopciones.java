@@ -18,7 +18,7 @@ public class Adopciones {
     public Adopciones() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.db = DriverManager.getConnection("jdbc:mysql://localhost/adopcionesperrunas?useSSL=false&serverTimezone=UTC", "root", "");
+            this.db = DriverManager.getConnection("jdbc:mysql://localhost/adopcionesperrunas?useSSL=false&serverTimezone=UTC", "root", "3li4lexR0m040");
         } catch (Exception e) {
             System.err.println("Error: " + e);
         }

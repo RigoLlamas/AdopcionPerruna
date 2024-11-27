@@ -97,7 +97,7 @@
                 });
             </script>
             
-            <form action="solicitud_adopcion.jsp" method="get">
+            <form action="solicitud.jsp">
                 <input type="hidden" name="Mascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
                     <div class="tarjeta">

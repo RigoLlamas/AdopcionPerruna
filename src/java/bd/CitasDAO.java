@@ -60,7 +60,7 @@ public class CitasDAO extends Adopciones {
     public ArrayList<Citas> select_from_usr(int pk_user) {
         ArrayList<Citas> citas = new ArrayList<>();
         try {
-            PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM `citas` WHERE FK_Solicitud = (SELECT PK_Solicitud FROM solicitudesadopcion WHERE FK_Usuario = ?);");
+            PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM citas WHERE FK_Solicitud IN (SELECT PK_Solicitud FROM solicitudesadopcion WHERE FK_Usuario = ?);");
             ps.setInt(1, pk_user);
             ResultSet rs = ps.executeQuery();
             System.out.println("Consulta realizada");

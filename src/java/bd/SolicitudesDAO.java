@@ -19,17 +19,15 @@ public class SolicitudesDAO extends Adopciones {
         super();
     }
 
-    public void insert(Solicitudes solicitud) {
+    public void insert(int pk_user, int mascota, String comentarios) {
         try {
             PreparedStatement ps;
             ps = getConnection().prepareStatement(
-                    "INSERT INTO `solicitudesadopcion` (FK_Usuario, FK_Mascota, FechaSolicitud, EstadoSolicitud, Comentarios) VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO `solicitudesadopcion` (FK_Usuario, FK_Mascota, FechaSolicitud, EstadoSolicitud, Comentarios) VALUES (?, ?, CURRENT_DATE, 'Enviada', ?)"
             );
-            ps.setInt(1, solicitud.getFk_usuario());
-            ps.setInt(2, solicitud.getFk_mascota());
-            ps.setDate(3, java.sql.Date.valueOf(solicitud.getFechaSolicitud()));
-            ps.setString(4, solicitud.getEstadoSolicitud());
-            ps.setString(5, solicitud.getComentarios());
+            ps.setInt(1, pk_user);
+            ps.setInt(2, mascota);
+            ps.setString(3, comentarios);
             ps.execute();
             System.out.println("Solicitud insertada correctamente.");
         } catch (Exception e) {

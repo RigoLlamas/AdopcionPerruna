@@ -12,16 +12,14 @@
             %>
             <li><a href="LoginServlet">Mascotas</a></li>
             <li><a href="peticiones.jsp">Peticiones</a></li>
-<<<<<<< HEAD
             <li><a href="citas.jsp">Citas</a></li>
+            <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>
                 <%
                 } else if ("Usuario".equals(tipo)) {
                 %>
-            <li><a href="index.jsp">Ver Mascotas</a></li>
+            <li><a href="LoginServlet">Ver Mascotas</a></li>
             <li><a href="peticiones.jsp">Mis Peticiones</a></li>
             <li><a href="citas.jsp">Mis Citas</a></li>
-=======
-            <li><a href="#">Citas</a></li>
             <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>
                 <%
                 } else if ("Usuario".equals(tipo)) {
@@ -30,7 +28,7 @@
             <li><a href="#">Mis Peticiones</a></li>
             <li><a href="#">Mis Citas</a></li>
             <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>
->>>>>>> 00e15f2c0c03ecd950d4a35bf322fcc18589027d
+
                 <%
                     }
                 %>
