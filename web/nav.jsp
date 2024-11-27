@@ -7,7 +7,6 @@
             <%
                 // Obtiene el tipo de usuario de la sesión
                 String tipo = (String) request.getSession().getAttribute("tipo");
-
                 if ("Administrador".equals(tipo)) {
             %>
             <li><a href="LoginServlet">Mascotas</a></li>
@@ -20,6 +19,7 @@
             <li><a href="LoginServlet">Ver Mascotas</a></li>
             <li><a href="peticiones.jsp">Mis Peticiones</a></li>
             <li><a href="citas.jsp">Mis Citas</a></li>
+<<<<<<< HEAD
             <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>
                 <%
                 } else if ("Usuario".equals(tipo)) {
@@ -29,6 +29,10 @@
             <li><a href="#">Mis Citas</a></li>
             <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>
 
+=======
+            <li><a href="#">Citas</a></li>
+            <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>            
+>>>>>>> 407de85d65dbc4a2893073ec610e66f2f7925ebe
                 <%
                     }
                 %>

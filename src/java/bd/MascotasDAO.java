@@ -68,7 +68,7 @@ public class MascotasDAO extends Adopciones {
         }
         return m;
     }
-    
+
     public Mascotas select_mascota(int fkmascota) {
         Mascotas mascota = new Mascotas();
         try {
@@ -147,22 +147,52 @@ public class MascotasDAO extends Adopciones {
         return false;
     }
 
-    public void delete(int pk_mascota) {
+    public boolean delete(int pk_mascota) {
         try {
             PreparedStatement ps;
             ps = getConnection().prepareStatement(
-                    "DELETE FROM ´mascotas´ WHERE PK_Mascota = ?"
+                    "DELETE FROM `mascotas` WHERE PK_Mascota = ?"
             );
             ps.setInt(1, pk_mascota);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Mascota eliminada correctamente.");
+                return true;
             } else {
-                System.out.println("No se encontró una mascota con el ID especificado.");
+                return false;
             }
         } catch (Exception e) {
-            System.err.println("Error al eliminar mascota: " + e.getMessage());
+            return false;
         }
+    }
+
+    public ArrayList<Mascotas> selectPorCategoria(int categoriaId) {
+        ArrayList<Mascotas> listaMascotas = new ArrayList<>();
+        try {
+            PreparedStatement ps;
+            ps = getConnection().prepareStatement(
+                    "SELECT * FROM `mascotas` WHERE FK_Categoria = ?"
+            );
+            ps.setInt(1, categoriaId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Mascotas mascota = new Mascotas();
+                // Establece los atributos de la mascota desde el ResultSet
+                mascota.setPk_mascota(rs.getInt("PK_Mascota"));
+                mascota.setNombre(rs.getString("Nombre"));
+                mascota.setEdad(rs.getInt("Edad"));
+                mascota.setSexo(rs.getString("Sexo"));
+                mascota.setDescripcion(rs.getString("Descripcion"));
+                mascota.setEstado(rs.getString("Estado"));
+                mascota.setImagen(rs.getString("Imagen"));
+                // Agrega la mascota a la lista
+                listaMascotas.add(mascota);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaMascotas;
     }
 
 }
