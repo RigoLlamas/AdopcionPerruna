@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import bd.CategoriasDAO;
 import bd.MascotasDAO;
 import bd.UsuariosDAO;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import modelos.Categorias;
 import modelos.Mascotas;
 
 /**
@@ -62,15 +64,41 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Invalidar la sesión
-        HttpSession session = request.getSession();
-        
-        if (session.getAttribute("loggedIn").equals(true)) {
+        // Obtener la sesión actual
+        HttpSession session = request.getSession(false);
+
+        if (session != null && Boolean.TRUE.equals(session.getAttribute("loggedIn"))) {
             MascotasDAO mascotaDAO = new MascotasDAO();
-            ArrayList<Mascotas> listaMascotas = mascotaDAO.select();
+            ArrayList<Mascotas> listaMascotas;
+
+            // Obtener el parámetro de categoría seleccionado
+            String categoriaSeleccionada = request.getParameter("categoria");
+
+            if (categoriaSeleccionada != null && !categoriaSeleccionada.isEmpty()) {
+                // Filtrar las mascotas por categoría
+                int categoriaId = Integer.parseInt(categoriaSeleccionada);
+                listaMascotas = mascotaDAO.selectPorCategoria(categoriaId);
+            } else {
+                // Obtener todas las mascotas
+                listaMascotas = mascotaDAO.select();
+            }
+
             request.setAttribute("listaMascotas", listaMascotas);
+
+            // Obtener las categorías
+            CategoriasDAO categoriaDAO = new CategoriasDAO();
+            ArrayList<Categorias> listaCategorias = categoriaDAO.select();
+            request.setAttribute("listaCategorias", listaCategorias);
+
+            // Pasar la categoría seleccionada a la JSP
+            request.setAttribute("categoriaSeleccionada", categoriaSeleccionada);
+
+            // Reenviar a index.jsp
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        };
+        } else {
+            // Si no hay sesión o no está logueado, redirigir al login
+            response.sendRedirect("LoginServlet");
+        }
     }
 
     /**
@@ -88,29 +116,24 @@ public class LoginServlet extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
 
         UsuariosDAO usuarioDAO = new UsuariosDAO();
-        MascotasDAO mascotaDAO = new MascotasDAO();
         HttpSession session = request.getSession();
-
-        
 
         try {
             String tipoUsuario = usuarioDAO.validarUsuario(email, contrasena);
-            ArrayList<Mascotas> listaMascotas = mascotaDAO.select();
             if (tipoUsuario != null) {
                 session.setAttribute("loggedIn", true);
                 session.setAttribute("username", email);
                 session.setAttribute("tipo", tipoUsuario);
-                request.setAttribute("listaMascotas", listaMascotas);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                response.sendRedirect("LoginServlet");
             } else {
-                request.setAttribute("errorMessage", "Crendenciales incorrectas");
+                request.setAttribute("errorMessage", "Credenciales incorrectas");
                 session.setAttribute("loggedIn", false);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("LoginServlet").forward(request, response);
             }
         } catch (Exception e) {
             session.setAttribute("loggedIn", false);
             request.setAttribute("errorMessage", "Error al validar el usuario. Intente de nuevo.");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("LoginServlet").forward(request, response);
         }
     }
 

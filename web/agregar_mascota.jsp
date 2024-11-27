@@ -11,6 +11,7 @@
     <head>
         <title>Agregar Nueva Mascota</title>
         <jsp:include page="nav.jsp" />
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
         <div class="contenedor">
@@ -48,18 +49,12 @@
 
                 <label for="fk_categoria">Categoría:</label>
                 <select id="fk_categoria" name="fk_categoria">
-                    <option value="1">Categoría 1</option>
-                    <option value="2">Categoría 2</option>
-                    <!-- Añade más opciones según tus categorías -->
+                    <c:forEach var="categoria" items="${categorias}">
+                        <option value="${categoria.pk_categoria}">
+                            ${categoria.tipoMascota} - ${categoria.raza}
+                        </option>
+                    </c:forEach>
                 </select>
-
-                <label for="estado">Estado:</label>
-                <select id="estado" name="estado" required>
-                    <option value="Disponible">Disponible</option>
-                    <option value="Adoptado">Adoptado</option>
-                </select>
-
-                <!-- Puedes agregar un campo para subir una imagen si lo deseas -->
 
                 <button type="submit">Agregar Mascota</button>
             </form>

@@ -4,7 +4,9 @@
  */
 package servlets;
 
+import bd.CategoriasDAO;
 import bd.MascotasDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import modelos.Categorias;
 import modelos.Mascotas;
 
 /**
@@ -61,7 +65,21 @@ public class AgregarMascotaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        HttpSession session = request.getSession(false);
+        if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
+            response.sendRedirect("LoginServlet");
+            return;
+        }
+
+        // Obtener las categorías
+        CategoriasDAO categoriaDAO = new CategoriasDAO();
+        ArrayList<Categorias> categorias = categoriaDAO.select();
+
+        // Pasar las categorías a la JSP
+        request.setAttribute("categorias", categorias);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("agregar_mascota.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -75,7 +93,7 @@ public class AgregarMascotaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession(false);
         if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
             response.sendRedirect("login.jsp");
@@ -88,7 +106,7 @@ public class AgregarMascotaServlet extends HttpServlet {
             int edad = Integer.parseInt(request.getParameter("edad"));
             String sexo = request.getParameter("sexo");
             String descripcion = request.getParameter("descripcion");
-            String estado = request.getParameter("estado");
+            String estado = "Disponible";
             int fk_categoria = Integer.parseInt(request.getParameter("fk_categoria"));
 
             // Fecha de ingreso
@@ -108,7 +126,6 @@ public class AgregarMascotaServlet extends HttpServlet {
             mascota.setFk_categoria(fk_categoria);
             mascota.setFechaIngreso(fechaIngreso);
             mascota.setImagen("IMAGENES/default.png"); // Establecer imagen por defecto
-
 
             MascotasDAO mascotaDAO = new MascotasDAO();
             boolean agregada = mascotaDAO.insert(mascota);
