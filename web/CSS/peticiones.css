@@ -12,14 +12,14 @@ div {
 /* Estilo para los párrafos */
 div p {
     font-size: 16px;
-    color: #333;              /* Texto gris oscuro */
+    color: #4a4a4a;              /* Texto gris oscuro */
     margin: 8px 0;            /* Espaciado vertical */
 }
 
 /* Estilo para los títulos h3 */
 div h3 {
     font-size: 18px;
-    color: #0056b3;           /* Azul para destacar */
+    color: #6f4e37;           /* Azul para destacar */
     margin: 10px 0;
 }
 
@@ -39,4 +39,8 @@ div div[contenteditable="false"] {
     border-radius: 4px;       /* Bordes redondeados */
     margin-top: 10px;         /* Espaciado superior */
     border: 1px dashed #bbb;  /* Borde punteado */
+}
+
+body{
+    background: #fffaf2;
 }

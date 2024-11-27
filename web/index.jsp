@@ -15,30 +15,9 @@
         <title>Adopción Perruna</title>
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mascotas.css">
-    <nav class="barra_navegacion" id="inicio" style="display: none;">
-        <h1>Bienvenido a Adopciones Perrunas</h1>
-        <ul id="menu-opciones">
-            <%
-                // Obtiene el tipo de usuario de la sesión
-                String tipo = (String) request.getSession().getAttribute("tipo");
-
-                if ("Administrador".equals(tipo)) {
-            %>
-            <li><a href="#">Mascotas</a></li>
-            <li><a href="peticiones.jsp">Peticiones</a></li>
-            <li><a href="#">Citas</a></li>
-                <%
-                } else if ("Usuario".equals(tipo)) {
-                %>
-            <li><a href="index.jsp">Ver Mascotas</a></li>
-            <li><a href="#">Mis Peticiones</a></li>
-            <li><a href="#">Mis Citas</a></li>
-                <%
-                    }
-                %>
-            <li><a href="logout">Cerrar Sesión</a></li>
-        </ul>
-    </nav>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <jsp:include page="nav.jsp" />
+        <%String tipo = (String) request.getSession().getAttribute("tipo");%>
 </head>
 <body>
 
@@ -54,6 +33,14 @@
             String errorMessage = (String) request.getAttribute("errorMessage");
             if (errorMessage != null) {
         %>
+        <script>
+                Swal.fire({
+                    title: 'Ups..',
+                    text: 'hubo un error 😣',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+        </script>
         <div class="error-message"><%= errorMessage%></div>
         <% } %>
         <form action="LoginServlet" method="POST">
@@ -75,6 +62,14 @@
                     for (Mascotas mascota : listaMascotas) {
                         if ("Usuario".equals(tipo)) {
             %>
+            <script>
+                Swal.fire({
+                    title: '¡Bienvenido usuario!',
+                    text: 'Se ha logueado correctamente 😎',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
             <form action="solicitud_adopcion.jsp" method="get" class="tarjeta-form">
                 <input type="hidden" name="Mascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
@@ -98,6 +93,14 @@
             <%
             } else if ("Administrador".equals(tipo)) {
             %>
+            <script>
+                Swal.fire({
+                    title: '¡Bienvenido Administrador!',
+                    text: 'Se ha logueado correctamente 😎',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
             <form action="ModificarMascotaServlet" method="GET" class="tarjeta-form">
                 <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
