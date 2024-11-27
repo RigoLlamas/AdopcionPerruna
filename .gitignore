@@ -1,0 +1,5 @@
+# Ignorar el directorio build/web/WEB-INF/lib
+build/web/WEB-INF/lib/
+
+# Ignorar el archivo src/java/bd/Adopciones.java
+src/java/bd/Adopciones.java
