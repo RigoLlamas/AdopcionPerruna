@@ -30,6 +30,22 @@
     <div class="contenedor" id="login" style="display: none;">
         <h1>Iniciar Sesión</h1>
         <%
+            String logout = request.getParameter("logout");
+            if ("true".equals(logout)) {
+        %>
+            <script>
+                Swal.fire({
+                    title: '¡Sesión cerrada!',
+                    text: 'Tu sesión se ha cerrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        <%
+            }
+        %>
+
+        <%
             String errorMessage = (String) request.getAttribute("errorMessage");
             if (errorMessage != null) {
         %>
