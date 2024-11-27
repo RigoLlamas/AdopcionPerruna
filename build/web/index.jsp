@@ -47,7 +47,7 @@
 
         <%
             String errorMessage = (String) request.getAttribute("errorMessage");
-            if (errorMessage != null) {
+            if (errorMessage != null && logout == null) {
         %>
         <script>
                 Swal.fire({
