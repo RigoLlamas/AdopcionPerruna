@@ -112,7 +112,7 @@
                 <script>
                     Swal.fire({
                         title: '¡Bienvenido usuario!',
-                        text: 'Se ha logueado correctamente 😎',
+                        text: '¿Cómo estas hoy? 😎',
                         icon: 'success',
                         confirmButtonText: 'Aceptar'
                     });
@@ -129,44 +129,35 @@
                              alt="<%= mascota.getNombre()%>"
                              class="imagen-mascota">
 
-                            <div class="contenido-tarjeta">
-                                <h3>
-                                    <%= mascota.getNombre()%>
-                                </h3>
-                                <p><strong>Edad:</strong>
-                                    <%= mascota.getEdad()%> años
-                                </p>
-                                <p><strong>Sexo:</strong>
-                                    <%= mascota.getSexo()%>
-                                </p>
-                                <p><strong>Descripción:</strong>
-                                    <%= mascota.getDescripcion()%>
-                                </p>
-                                <p><strong>Estado:</strong>
-                                    <%= mascota.getEstado()%>
-                                </p>
-                            </div>
+                        <div class="contenido-tarjeta">
+                            <h3><%= mascota.getNombre()%></h3>
+                            <p><strong>Edad:</strong> <%= mascota.getEdad()%> años</p>
+                            <p><strong>Sexo:</strong> <%= mascota.getSexo()%></p>
+                            <p><strong>Descripción:</strong> <%= mascota.getDescripcion()%></p>
+                            <p><strong>Estado:</strong> <%= mascota.getEstado()%></p>
                         </div>
-                    </button>
-                </form>
-                <% } else if ("Administrador".equals(tipo)) {%>
-                <script>
-                    Swal.fire({
-                        title: '¡Bienvenido Administrador!',
-                        text: 'Se ha logueado correctamente 😎',
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar'
-                    });
-                </script>
-                <form action="ModificarMascotaServlet" method="GET">
-                    <input type="hidden" name="idMascota"
-                           value="<%= mascota.getPk_mascota()%>">
-                    <button type="submit" class="tarjeta-boton">
-                        <div class="tarjeta">
-                             <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
-                                                                        ? mascota.getImagen()
-                                                                        : " IMAGENES/default.png"%>"
-                             alt="<%= mascota.getNombre()%>"
+                    </div>
+                </button>
+            </form>
+            <%
+            } else if ("Administrador".equals(tipo)) {
+            %>
+            <script>
+                Swal.fire({
+                    title: '¡Bienvenido Administrador!',
+                    text: 'Se ha logueado correctamente 😎',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+            <form action="ModificarMascotaServlet" method="GET">
+                <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota()%>">
+                <button type="submit" class="tarjeta-boton">
+                    <div class="tarjeta">
+                        <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
+                                ? mascota.getImagen()
+                                : "IMAGENES/default.png"%>" 
+                             alt="<%= mascota.getNombre()%>" 
                              class="imagen-mascota">
 
                             <div class="contenido-tarjeta">

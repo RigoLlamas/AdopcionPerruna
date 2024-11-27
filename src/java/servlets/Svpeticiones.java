@@ -90,8 +90,6 @@ public class Svpeticiones extends HttpServlet {
                     if (u != null && m != null) {
                         Peticiones.Peticiones.add(new Peticion(s, m, u));
                     }
-                    System.out.println(u.getPk_usuario());
-                    System.out.println(m.getPk_mascota());
                 }
             } else {
                 Usuarios u = udao.select_user(username);
