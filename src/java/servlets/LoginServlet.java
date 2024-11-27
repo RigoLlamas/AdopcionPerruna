@@ -64,10 +64,13 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         // Invalidar la sesión
         HttpSession session = request.getSession();
-        session.invalidate();
-
-        // Redirigir al inicio de sesión
-        response.sendRedirect("index.jsp");
+        
+        if (session.getAttribute("loggedIn").equals(true)) {
+            MascotasDAO mascotaDAO = new MascotasDAO();
+            ArrayList<Mascotas> listaMascotas = mascotaDAO.select();
+            request.setAttribute("listaMascotas", listaMascotas);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        };
     }
 
     /**
@@ -85,9 +88,11 @@ public class LoginServlet extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
 
         UsuariosDAO usuarioDAO = new UsuariosDAO();
-        MascotasDAO mascotaDAO = new MascotasDAO(); 
+        MascotasDAO mascotaDAO = new MascotasDAO();
         HttpSession session = request.getSession();
+
         
+
         try {
             String tipoUsuario = usuarioDAO.validarUsuario(email, contrasena);
             ArrayList<Mascotas> listaMascotas = mascotaDAO.select();
@@ -96,7 +101,6 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", email);
                 session.setAttribute("tipo", tipoUsuario);
                 request.setAttribute("listaMascotas", listaMascotas);
-
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 request.setAttribute("errorMessage", "Crendenciales incorrectas");

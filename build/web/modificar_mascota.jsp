@@ -31,7 +31,7 @@
             <% } %>
 
             <!-- Formulario de modificación -->
-            <form action="modificar_mascota" method="POST">
+            <form action="ModificarMascotaServlet" method="POST">
                 <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota() %>">
 
                 <label for="nombre">Nombre:</label>
