@@ -81,7 +81,7 @@
             <script>
                 Swal.fire({
                     title: '¡Bienvenido usuario!',
-                    text: 'Se ha logueado correctamente 😎',
+                    text: '¿Cómo estas hoy? 😎',
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
                 });
@@ -112,7 +112,7 @@
             <script>
                 Swal.fire({
                     title: '¡Bienvenido Administrador!',
-                    text: 'Se ha logueado correctamente 😎',
+                    text: '¿Cómo estas hoy? 😎',
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
                 });

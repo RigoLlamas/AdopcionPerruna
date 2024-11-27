@@ -17,7 +17,7 @@
                 } else if ("Usuario".equals(tipo)) {
                 %>
             <li><a href="index.jsp">Ver Mascotas</a></li>
-            <li><a href="#">Mis Peticiones</a></li>
+            <li><a href="peticiones.jsp">Mis Peticiones</a></li>
             <li><a href="#">Mis Citas</a></li>
                 <%
                     }
