@@ -61,8 +61,9 @@ label {
     color: var(--cafe_gris); /* Gris café */
 }
 
-input[type="email"],
-input[type="password"],
+input,
+textarea,
+select,
 button {
     padding: 10px;
     border: 1px solid var(--borde); /* Borde gris/café claro */
@@ -72,8 +73,7 @@ button {
     color: var(--cafe_gris); /* Texto gris café */
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
+input:focus {
     outline: none;
     border-color: var(--cafe_claro); /* Café claro */
     box-shadow: 0 0 5px #a5886f;
@@ -101,12 +101,6 @@ button:hover {
     border-radius: 5px;
     text-align: center;
     margin-bottom: 10px;
-}
-
-/* Enlaces */
-a {
-    color: var(--cafe_oscuro);
-    text-decoration: none;
 }
 
 a:hover {

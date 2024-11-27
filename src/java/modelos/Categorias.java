@@ -13,7 +13,6 @@ public class Categorias {
     private String tipoMascota,
             raza;
 
-    // Getters y Setters
     public int getPk_categoria() {
         return pk_categoria;
     }

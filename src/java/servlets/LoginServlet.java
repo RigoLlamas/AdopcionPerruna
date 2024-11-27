@@ -19,7 +19,7 @@ import modelos.Mascotas;
 
 /**
  *
- * @author Rigo
+ * @author Rigo y Joshua
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {

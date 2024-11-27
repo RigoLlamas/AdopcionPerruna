@@ -69,7 +69,34 @@ public class MascotasDAO extends Adopciones {
         return m;
     }
 
-    public void update(Mascotas m) {
+    public Mascotas obtenerMascota(int pk_mascota) {
+        Mascotas m = new Mascotas();
+        try {
+            PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM `mascotas` WHERE PK_Mascota = ?");
+            ps.setInt(1, pk_mascota);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                m.setPk_mascota(rs.getInt("PK_Mascota"));
+                m.setNombre(rs.getString("Nombre"));
+                m.setEdad(rs.getInt("Edad"));
+                m.setSexo(rs.getString("Sexo"));
+                m.setDescripcion(rs.getString("Descripcion"));
+                m.setImagen(rs.getString("ImagenURL"));
+                Date fecha = rs.getDate("FechaIngreso");
+                if (fecha != null) {
+                    m.setFechaIngreso(fecha.toLocalDate());
+                } else {
+                    m.setFechaIngreso(null);
+                }
+                m.setFk_categoria(rs.getInt("FK_Categoria"));
+                m.setEstado(rs.getString("Estado"));
+            }
+        } catch (Exception e) {
+        }
+        return m;
+    }
+
+    public boolean update(Mascotas m) {
         try {
             PreparedStatement ps;
             ps = getConnection().prepareStatement(
@@ -84,14 +111,13 @@ public class MascotasDAO extends Adopciones {
             ps.setString(7, m.getEstado());
             ps.setInt(8, m.getPk_mascota());
             int rowsAffected = ps.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Mascota actualizada correctamente.");
-            } else {
-                System.out.println("No se encontró una mascota con el ID especificado.");
+            if (!(rowsAffected > 0)) {
+                return false;
             }
         } catch (Exception e) {
-            System.err.println("Error al actualizar mascota: " + e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public void delete(int pk_mascota) {
