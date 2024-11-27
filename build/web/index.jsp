@@ -20,7 +20,7 @@
         <%String tipo = (String) request.getSession().getAttribute("tipo");%>
 </head>
 <body>
-
+<!--ei-->
     <header>
 
     </header>

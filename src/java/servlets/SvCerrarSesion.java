@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name = "SvCerrarSesion", urlPatterns = {"/SvCerrarSesion"})
 public class SvCerrarSesion extends HttpServlet {
-
+//ei
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
