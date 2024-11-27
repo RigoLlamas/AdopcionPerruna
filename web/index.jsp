@@ -15,6 +15,7 @@
         <title>Adopción Perruna</title>
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mascotas.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <jsp:include page="nav.jsp" />
         <%String tipo = (String) request.getSession().getAttribute("tipo");%>
 </head>
@@ -32,6 +33,14 @@
             String errorMessage = (String) request.getAttribute("errorMessage");
             if (errorMessage != null) {
         %>
+        <script>
+                Swal.fire({
+                    title: 'Ups..',
+                    text: 'hubo un error 😣',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+        </script>
         <div class="error-message"><%= errorMessage%></div>
         <% } %>
         <form action="LoginServlet" method="POST">
@@ -53,6 +62,14 @@
                     for (Mascotas mascota : listaMascotas) {
                         if ("Usuario".equals(tipo)) {
             %>
+            <script>
+                Swal.fire({
+                    title: '¡Bienvenido usuario!',
+                    text: 'Se ha logueado correctamente 😎',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
             <form action="solicitud_adopcion.jsp" method="get" class="tarjeta-form">
                 <input type="hidden" name="Mascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
@@ -76,6 +93,14 @@
             <%
             } else if ("Administrador".equals(tipo)) {
             %>
+            <script>
+                Swal.fire({
+                    title: '¡Bienvenido Administrador!',
+                    text: 'Se ha logueado correctamente 😎',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
             <form action="ModificarMascotaServlet" method="GET" class="tarjeta-form">
                 <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota()%>">
                 <button type="submit" class="tarjeta-boton">
