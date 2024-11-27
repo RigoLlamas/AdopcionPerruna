@@ -4,12 +4,8 @@
  */
 package servlets;
 
-import bd.CitasDAO;
-import bd.MascotasDAO;
 import bd.SolicitudesDAO;
 import bd.UsuariosDAO;
-import global.CitasP;
-import global.Peticiones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,20 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import modelos.Cita;
-import modelos.Citas;
-import modelos.Mascotas;
-import modelos.Peticion;
-import modelos.Solicitudes;
 import modelos.Usuarios;
 
 /**
  *
  * @author Joshua Romo
  */
-@WebServlet(name = "SvCitas", urlPatterns = {"/SvCitas"})
-public class SvCitas extends HttpServlet {
+@WebServlet(name = "SvSolicitud", urlPatterns = {"/SvSolicitud"})
+public class SvSolicitud extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +40,10 @@ public class SvCitas extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SvCitas</title>");
+            out.println("<title>Servlet SvSolicitud</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SvCitas at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SvSolicitud at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,41 +61,7 @@ public class SvCitas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
-        String tipo = (String) request.getAttribute("tipo");
-
-        if (username == null || tipo == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Datos de sesión o tipo faltantes");
-            return;
-        }
-
-        CitasDAO cdao = new CitasDAO();
-        UsuariosDAO udao = new UsuariosDAO();
-        Usuarios user = udao.select_user(username);
-
-        try {
-            if (tipo.equals("Administrador")) {
-               ArrayList<Citas> citas = cdao.select();
-               for(Citas c : citas){
-                   int x = cdao.getUserFromCita(c.getFk_solicitud());
-                   Usuarios u = udao.select_user2(x);
-                   Cita cita = new Cita(c, u);
-                   CitasP.Citas.add(cita);
-               }
-            } else {       
-                ArrayList<Citas> citas = cdao.select_from_usr(user.getPk_usuario());
-                for(Citas c : citas){
-                   Cita cita = new Cita(c, user);
-                   CitasP.Citas.add(cita);
-               }
-            }
-            response.sendRedirect("citas.jsp");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error procesando datos");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -119,7 +75,23 @@ public class SvCitas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        String comentario = request.getParameter("comentario");
+        String mascota = request.getParameter("mascota");
+        String username = (String)session.getAttribute("username");
+        int mascota_id = Integer.parseInt(mascota);
+        
+        
+        UsuariosDAO udao = new UsuariosDAO();
+        
+        
+        if(username == null){
+            response.sendRedirect("LoginServlet");
+        }
+        Usuarios u = udao.select_user(username);
+        SolicitudesDAO sdao = new SolicitudesDAO();
+        sdao.insert(u.getPk_usuario(), mascota_id, comentario);
+        response.sendRedirect("peticiones.jsp");
     }
 
     /**

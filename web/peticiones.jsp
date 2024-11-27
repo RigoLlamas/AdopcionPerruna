@@ -16,7 +16,7 @@
         String tipodeusuario = (String) session.getAttribute("tipo");
         
         if (tipodeusuario == null) { 
-            response.sendRedirect("index.jsp"); 
+            response.sendRedirect("LoginServlet.jsp"); 
             return;
         } else {
             request.setAttribute("tipo", tipodeusuario);

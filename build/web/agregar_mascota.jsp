@@ -18,7 +18,8 @@
             <h1>Agregar Nueva Mascota</h1>
 
             <%
-                if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
+                String tipodeusuario = (String) session.getAttribute("tipo");
+                if (tipodeusuario == null || !"Administrador".equals(session.getAttribute("tipo"))) {
                     response.sendRedirect("LoginServlet");
                     return;
                 }
