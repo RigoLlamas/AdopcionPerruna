@@ -22,7 +22,7 @@
         String tipodeusuario = (String) session.getAttribute("tipo");
         
         if (tipodeusuario == null) { 
-            response.sendRedirect("LoginServlet.jsp"); 
+            response.sendRedirect("index.jsp"); 
             return;
         } else {
             request.setAttribute("tipo", tipodeusuario);

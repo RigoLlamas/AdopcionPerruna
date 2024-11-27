@@ -4,8 +4,7 @@
  */
 package servlets;
 
-import bd.SolicitudesDAO;
-import bd.UsuariosDAO;
+import bd.CitasDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modelos.Usuarios;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import modelos.Citas;
 
 /**
  *
- * @author Joshua Romo
+ * @author Rigo
  */
-@WebServlet(name = "SvSolicitud", urlPatterns = {"/SvSolicitud"})
-public class SvSolicitud extends HttpServlet {
+@WebServlet(name = "GenerarCitaServlet", urlPatterns = {"/GenerarCitaServlet"})
+public class GenerarCitaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +42,10 @@ public class SvSolicitud extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SvSolicitud</title>");
+            out.println("<title>Servlet GenerarCitaServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SvSolicitud at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GenerarCitaServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,23 +77,36 @@ public class SvSolicitud extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String comentario = request.getParameter("comentario");
-        String mascota = request.getParameter("mascota");
-        String username = (String)session.getAttribute("username");
-        int mascota_id = Integer.parseInt(mascota);
-        
-        
-        UsuariosDAO udao = new UsuariosDAO();
-        
-        
-        if(username == null){
+
+        HttpSession session = request.getSession(false);
+        if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
             response.sendRedirect("index.jsp");
+            return;
         }
-        Usuarios u = udao.select_user(username);
-        SolicitudesDAO sdao = new SolicitudesDAO();
-        sdao.insert(u.getPk_usuario(), mascota_id, comentario);
-        response.sendRedirect("peticiones.jsp");
+
+        CitasDAO citasDAO = new CitasDAO();
+        Citas citas = new Citas();
+
+        try {
+            int fk_solicitud = Integer.parseInt(request.getParameter("idSolicitud"));
+            String nota = request.getParameter("nota");
+            String fechaCitaStr = request.getParameter("fechaCita");
+//            LocalDateTime fechaCita = null;
+//            if (fechaCitaStr != null && !fechaCitaStr.isEmpty()) {
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//                fechaCita = LocalDateTime.parse(fechaCitaStr, formatter);
+//            }
+
+            citas.setFk_solicitud(fk_solicitud);
+            citas.setNotas(nota);
+            citas.setEstadoCita("Programada");
+            citas.setFechaCita(LocalDateTime.parse(fechaCitaStr) );
+            if(citasDAO.insert(citas)){
+                
+                response.sendRedirect("index.jsp");
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**

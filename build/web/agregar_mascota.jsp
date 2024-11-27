@@ -46,7 +46,7 @@
                 <textarea id="descripcion" name="descripcion" required></textarea>
 
                 <label for="fechaIngreso">Fecha de Ingreso:</label>
-                <input type="date" id="fechaIngreso" name="fechaIngreso">
+                <input type="date" id="fechaIngreso" name="fechaIngreso" required>
 
                 <label for="fk_categoria">Categoría:</label>
                 <select id="fk_categoria" name="fk_categoria">

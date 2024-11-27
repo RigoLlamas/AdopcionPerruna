@@ -4,8 +4,7 @@
  */
 package servlets;
 
-import bd.SolicitudesDAO;
-import bd.UsuariosDAO;
+import bd.MascotasDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modelos.Usuarios;
+import java.time.LocalDate;
+import modelos.Mascotas;
 
 /**
  *
- * @author Joshua Romo
+ * @author Rigo
  */
-@WebServlet(name = "SvSolicitud", urlPatterns = {"/SvSolicitud"})
-public class SvSolicitud extends HttpServlet {
+@WebServlet(name = "EliminarMascotaServlet", urlPatterns = {"/EliminarMascotaServlet"})
+public class EliminarMascotaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class SvSolicitud extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SvSolicitud</title>");
+            out.println("<title>Servlet EliminarMascotaServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SvSolicitud at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EliminarMascotaServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,23 +75,28 @@ public class SvSolicitud extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String comentario = request.getParameter("comentario");
-        String mascota = request.getParameter("mascota");
-        String username = (String)session.getAttribute("username");
-        int mascota_id = Integer.parseInt(mascota);
-        
-        
-        UsuariosDAO udao = new UsuariosDAO();
-        
-        
-        if(username == null){
+        HttpSession session = request.getSession(false);
+        if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
             response.sendRedirect("index.jsp");
+            return;
         }
-        Usuarios u = udao.select_user(username);
-        SolicitudesDAO sdao = new SolicitudesDAO();
-        sdao.insert(u.getPk_usuario(), mascota_id, comentario);
-        response.sendRedirect("peticiones.jsp");
+
+        try {
+            // Obtener y validar los parámetros del formulario
+            int idMascota = Integer.parseInt(request.getParameter("idMascota"));
+
+            MascotasDAO mascotaDAO = new MascotasDAO();
+            boolean actualizado = mascotaDAO.delete(idMascota);
+
+            if (actualizado) {
+                response.sendRedirect("index.jsp");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Ocurrió un error al procesar los datos.");
+            request.getRequestDispatcher("modificar_mascota.jsp").forward(request, response);
+        }
     }
 
     /**

@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import bd.CategoriasDAO;
 import bd.MascotasDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import modelos.Categorias;
 import modelos.Mascotas;
 
 /**
@@ -82,10 +85,15 @@ public class ModificarMascotaServlet extends HttpServlet {
         // Obtener la mascota
         MascotasDAO mascotasDAO = new MascotasDAO();
         Mascotas mascota = mascotasDAO.obtenerMascota(idMascota);
+        
+        CategoriasDAO categoriaDAO = new CategoriasDAO();
+        ArrayList<Categorias> categorias = categoriaDAO.select();
+
+        // Pasar las categorías a la JSP
+        request.setAttribute("categorias", categorias);
 
         if (mascota != null) {
             request.setAttribute("mascota", mascota);
-            // Reenviar al JSP en WEB-INF
             request.getRequestDispatcher("modificar_mascota.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "La mascota no existe.");

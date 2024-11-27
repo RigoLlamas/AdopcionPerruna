@@ -19,7 +19,7 @@ public class CitasDAO extends Adopciones {
         super();
     }
 
-    public void insert(Citas cita) {
+    public boolean insert(Citas cita) {
         try {
             PreparedStatement ps;
             ps = getConnection().prepareStatement(
@@ -30,10 +30,11 @@ public class CitasDAO extends Adopciones {
             ps.setString(3, cita.getEstadoCita());
             ps.setString(4, cita.getNotas());
             ps.execute();
-            System.out.println("Cita insertada correctamente.");
+            return true;
         } catch (Exception e) {
-            System.err.println("Error al insertar cita: " + e.getMessage());
+            return false;
         }
+        
     }
 
     public ArrayList<Citas> select() {

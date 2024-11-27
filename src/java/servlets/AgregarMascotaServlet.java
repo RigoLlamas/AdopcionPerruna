@@ -68,7 +68,7 @@ public class AgregarMascotaServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
-            response.sendRedirect("LoginServlet");
+            response.sendRedirect("index.jsp");
             return;
         }
 

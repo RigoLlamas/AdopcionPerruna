@@ -12,7 +12,7 @@
         <li><a href="LoginServlet">Mascotas</a></li>
         <li><a href="peticiones.jsp">Peticiones</a></li>
         <li><a href="citas.jsp">Citas</a></li>
-        <li><a href="SvCerrarSesion">Cerrar Sesi�n</a></li>
+        <li><a href="SvCerrarSesion">Cerrar Sesion</a></li>
             <%
             } else if ("Usuario".equals(tipo)) {
             %>
