@@ -22,6 +22,6 @@
                 <%
                     }
                 %>
-            <li><a href="logout">Cerrar Sesión</a></li>
+            <li><a href="SvCerrarSesion">Cerrar Sesión</a></li>
         </ul>
     </nav>
