@@ -23,7 +23,7 @@
             dispatcher.include(request, response);
         }
     %>
-
+    <jsp:include page="nav.jsp" />
     <div>
         <%for(Peticion p: Peticiones.Peticiones){%>
             <p>Numero de solicitud: <%= p.getNSolicitud() %></p>
