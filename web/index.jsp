@@ -20,12 +20,6 @@
         <%String tipo = (String) request.getSession().getAttribute("tipo");%>
 </head>
 <body>
-<!--ei-->
-    <header>
-
-    </header>
-
-
     <!-- Contenedor de inicio de sesión -->
     <div class="contenedor" id="login" style="display: none;">
         <h1>Iniciar Sesión</h1>

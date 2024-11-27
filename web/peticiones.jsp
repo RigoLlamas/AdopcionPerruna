@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peticiones</title>
     <link rel="stylesheet" href="CSS/peticiones.css">
+    <jsp:include page="nav.jsp" />
 </head>
 <body>
     <%
@@ -23,7 +24,7 @@
             dispatcher.include(request, response);
         }
     %>
-    <jsp:include page="nav.jsp" />
+    
     <div>
         <%for(Peticion p: Peticiones.Peticiones){%>
             <p>Numero de solicitud: <%= p.getNSolicitud() %></p>

@@ -107,7 +107,7 @@ public class ModificarMascotaServlet extends HttpServlet {
         // Validar sesión y permisos
         HttpSession session = request.getSession(false);
         if (session == null || !"Administrador".equals(session.getAttribute("tipo"))) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("LoginServlet");
             return;
         }
 
