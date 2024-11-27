@@ -145,7 +145,7 @@ public class ModificarMascotaServlet extends HttpServlet {
 
             if (actualizado) {
                 // Redirigir a la página principal con un mensaje de éxito
-                response.sendRedirect("index.jsp?mensaje=actualizacion_exitosa");
+                response.sendRedirect("LoginServlet");
             } else {
                 // Manejar el error y reenviar al formulario con los datos actuales
                 request.setAttribute("error", "No se pudo actualizar la información de la mascota.");

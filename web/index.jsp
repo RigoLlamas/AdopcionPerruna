@@ -15,45 +15,17 @@
         <title>Adopción Perruna</title>
         <link rel="stylesheet" href="CSS/styles.css">
         <link rel="stylesheet" href="CSS/mascotas.css">
-<<<<<<< HEAD
     <nav class="barra_navegacion" id="inicio" style="display: none;">
         <h1>Bienvenido a Adopciones Perrunas</h1>
         <ul id="menu-opciones">
             <%
                 // Obtiene el tipo de usuario de la sesión
                 String tipo = (String) request.getSession().getAttribute("tipo");
-=======
-        <nav class="barra_navegacion" id="inicio" style="display: none;">
-            <h1>Bienvenido a Adopciones Perrunas</h1>
-            <ul id="menu-opciones">
-                <% 
-                    // Obtiene el tipo de usuario de la sesión
-                    String tipo = (String) request.getSession().getAttribute("tipo");
-                    if ("Administrador".equals(tipo)) {
-                %>
-                    <li><a href="#">Mascotas</a></li>
-                    <li><a href="peticiones.jsp">Peticiones</a></li>
-                    <li><a href="#">Citas</a></li>
-                <% 
-                    } else if ("Usuario".equals(tipo)) { 
-                %>
-                    <li><a href="mis_mascotas.html">Ver Mascotas</a></li>
-                    <li><a href="adopciones.html">Solicitar Adopción</a></li>
-                    <li><a href="perfil.html">Mi Perfil</a></li>
-                <% 
-                    } 
-                %>
-                <li><a href="logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </head>
-    <body>
->>>>>>> 3041ecee316e1c65e27bcf3f5f73682ad176552a
 
                 if ("Administrador".equals(tipo)) {
             %>
             <li><a href="#">Mascotas</a></li>
-            <li><a href="#">Peticiones</a></li>
+            <li><a href="peticiones.jsp">Peticiones</a></li>
             <li><a href="#">Citas</a></li>
                 <%
                 } else if ("Usuario".equals(tipo)) {
@@ -158,13 +130,7 @@
             %>
         </div>
 
-<<<<<<< HEAD
     </div>
-=======
-        <script>
-            // Script para decidir qué sección mostrar
-            const logeado = <%= Boolean.TRUE.equals(request.getSession().getAttribute("loggedIn")) ? 1 : 0 %>
->>>>>>> 3041ecee316e1c65e27bcf3f5f73682ad176552a
 
     <script>
         // Script para decidir qué sección mostrar

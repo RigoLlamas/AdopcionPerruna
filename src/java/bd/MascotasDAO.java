@@ -127,7 +127,7 @@ public class MascotasDAO extends Adopciones {
         try {
             PreparedStatement ps;
             ps = getConnection().prepareStatement(
-                    "UPDATE ´mascotas´ SET Nombre = ?, Edad = ?, Sexo = ?, Descripcion = ?, FechaIngreso = ?, FK_Categoria = ?, Estado = ? WHERE PK_Mascota = ?"
+                    "UPDATE `mascotas` SET Nombre = ?, Edad = ?, Sexo = ?, Descripcion = ?, FechaIngreso = ?, FK_Categoria = ?, Estado = ? WHERE PK_Mascota = ?"
             );
             ps.setString(1, m.getNombre());
             ps.setInt(2, m.getEdad());
@@ -138,13 +138,13 @@ public class MascotasDAO extends Adopciones {
             ps.setString(7, m.getEstado());
             ps.setInt(8, m.getPk_mascota());
             int rowsAffected = ps.executeUpdate();
-            if (!(rowsAffected > 0)) {
-                return false;
+            if (rowsAffected > 0) {
+                return true;
             }
         } catch (Exception e) {
             return false;
         }
-        return true;
+        return false;
     }
 
     public void delete(int pk_mascota) {
