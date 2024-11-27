@@ -68,6 +68,33 @@ public class MascotasDAO extends Adopciones {
         }
         return m;
     }
+    
+    public Mascotas select_mascota(int fkmascota) {
+        Mascotas mascota = new Mascotas();
+        try {
+            PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM `mascotas` WHERE PK_Mascota = ?");
+            ps.setInt(1, fkmascota);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                mascota.setPk_mascota(rs.getInt("PK_Mascota"));
+                mascota.setNombre(rs.getString("Nombre"));
+                mascota.setEdad(rs.getInt("Edad"));
+                mascota.setSexo(rs.getString("Sexo"));
+                mascota.setDescripcion(rs.getString("Descripcion"));
+                mascota.setImagen(rs.getString("ImagenURL"));
+                Date fecha = rs.getDate("FechaIngreso");
+                if (fecha != null) {
+                    mascota.setFechaIngreso(fecha.toLocalDate());
+                } else {
+                    mascota.setFechaIngreso(null);
+                }
+                mascota.setFk_categoria(rs.getInt("FK_Categoria"));
+                mascota.setEstado(rs.getString("Estado"));
+            }
+        } catch (Exception e) {
+        }
+        return mascota;
+    }
 
     public Mascotas obtenerMascota(int pk_mascota) {
         Mascotas m = new Mascotas();
