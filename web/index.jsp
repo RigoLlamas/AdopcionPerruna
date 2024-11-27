@@ -21,11 +21,10 @@
                 <% 
                     // Obtiene el tipo de usuario de la sesión
                     String tipo = (String) request.getSession().getAttribute("tipo");
-                    
                     if ("Administrador".equals(tipo)) {
                 %>
                     <li><a href="#">Mascotas</a></li>
-                    <li><a href="#">Peticiones</a></li>
+                    <li><a href="peticiones.jsp">Peticiones</a></li>
                     <li><a href="#">Citas</a></li>
                 <% 
                     } else if ("Usuario".equals(tipo)) { 
@@ -102,7 +101,7 @@
 
         <script>
             // Script para decidir qué sección mostrar
-            const logeado = <%= Boolean.TRUE.equals(request.getSession().getAttribute("loggedIn")) ? 1 : 0 %>;
+            const logeado = <%= Boolean.TRUE.equals(request.getSession().getAttribute("loggedIn")) ? 1 : 0 %>
 
             console.log("Estado del usuario: " + logeado);
 

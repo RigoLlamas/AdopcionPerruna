@@ -1,0 +1,42 @@
+/* Estilo general del contenedor */
+div {
+    background-color: #f9f9f9; /* Fondo claro */
+    border: 1px solid #ccc;   /* Borde gris */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 16px;            /* Espaciado interno */
+    max-width: 600px;         /* Ancho máximo */
+    margin: 20px auto;        /* Centrar horizontalmente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo para los párrafos */
+div p {
+    font-size: 16px;
+    color: #333;              /* Texto gris oscuro */
+    margin: 8px 0;            /* Espaciado vertical */
+}
+
+/* Estilo para los títulos h3 */
+div h3 {
+    font-size: 18px;
+    color: #0056b3;           /* Azul para destacar */
+    margin: 10px 0;
+}
+
+/* Estilo para el título h1 */
+div h1 {
+    font-size: 22px;
+    color: #d9534f;           /* Rojo para resaltar */
+    margin: 12px 0;
+}
+
+/* Estilo para el div de comentarios */
+div div[contenteditable="false"] {
+    font-size: 14px;
+    color: #666;              /* Texto gris medio */
+    background-color: #eaeaea; /* Fondo gris claro */
+    padding: 8px;             /* Espaciado interno */
+    border-radius: 4px;       /* Bordes redondeados */
+    margin-top: 10px;         /* Espaciado superior */
+    border: 1px dashed #bbb;  /* Borde punteado */
+}

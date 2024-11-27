@@ -58,6 +58,29 @@ public class SolicitudesDAO extends Adopciones {
         }
         return solicitudes;
     }
+    
+    public ArrayList<Solicitudes> selectfromuser(int userpk) {
+        ArrayList<Solicitudes> solicitudes = new ArrayList<>();
+        try {
+            PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM `solicitudesadopcion` WHERE FK_Usuario = ?");
+            ps.setInt(1, userpk);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("Consulta realizada");
+            while (rs.next()) {
+                Solicitudes solicitud = new Solicitudes();
+                solicitud.setPk_solicitud(rs.getInt("PK_Solicitud"));
+                solicitud.setFk_usuario(rs.getInt("FK_Usuario"));
+                solicitud.setFk_mascota(rs.getInt("FK_Mascota"));
+                solicitud.setFechaSolicitud(rs.getDate("FechaSolicitud").toLocalDate());
+                solicitud.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
+                solicitud.setComentarios(rs.getString("Comentarios"));
+                solicitudes.add(solicitud);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al realizar la consulta: " + e.getMessage());
+        }
+        return solicitudes;
+    }
 
     public void update(Solicitudes solicitud) {
         try {
