@@ -16,7 +16,12 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <jsp:include page="nav.jsp" />
-        <%String tipo = (String) request.getSession().getAttribute("tipo");%>
+        <%
+            String tipo = (String) request.getSession().getAttribute("tipo");
+            if (session.getAttribute("repitio") == null) {
+                session.setAttribute("repitio", false);
+            }
+        %>
     </head>
 
     <body>
@@ -24,7 +29,7 @@
         <div class="contenedor" id="login" style="display: none;">
             <h1>Iniciar Sesión</h1>
             <% String logout = request.getParameter("logout");
-                                if ("true".equals(logout)) { %>
+                if ("true".equals(logout)) { %>
             <script>
                 Swal.fire({
                     title: '¡Sesión cerrada!',
@@ -36,7 +41,7 @@
             <% } %>
 
             <% String errorMessage = (String) request.getAttribute("errorMessage");
-                                        if (errorMessage != null && logout == null) {%>
+                if (errorMessage != null && logout == null) {%>
 
             <script>
                 Swal.fire({
@@ -63,21 +68,21 @@
             <div style="display: flex; justify-content: space-between; margin: 1rem;">
                 <h2>Mascotas disponibles para adopción</h2>
                 <div style="display: flex;">
-                    <form action="LoginServlet" method="get">
+                    <form action="LoginServlet" method="GET">
                         <div>
                             <label for="categoria">Filtrar por categoría:</label>
-                        <select id="categoria" name="categoria">
-                            <option value="">Todas las categorías</option>
-                            <c:forEach var="categoria" items="${listaCategorias}">
-                                <option value="${categoria.pk_categoria}">
-                                    ${categoria.tipoMascota} - ${categoria.raza}
-                                </option>
-                            </c:forEach>
-                        </select>
-                        <button type="submit">Filtrar</button>
+                            <select id="categoria" name="categoria">
+                                <option value="">Todas las categorías</option>
+                                <c:forEach var="categoria" items="${listaCategorias}">
+                                    <option value="${categoria.pk_categoria}">
+                                        ${categoria.tipoMascota} - ${categoria.raza}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <button type="submit">Filtrar</button>
                         </div>
-                        
-                        
+
+
                     </form>
                 </div>
 
@@ -103,11 +108,15 @@
 
 
 
-                <% ArrayList<Mascotas> listaMascotas = (ArrayList<Mascotas>) request.getAttribute("listaMascotas");
+                <%
+                    ArrayList<Mascotas> listaMascotas = (ArrayList<Mascotas>) request.getAttribute("listaMascotas");
 
                     if (listaMascotas != null && !listaMascotas.isEmpty()) {
                         for (Mascotas mascota : listaMascotas) {
                             if ("Usuario".equals(tipo)) {
+                                if (Boolean.FALSE.equals(session.getAttribute("repitio"))) {
+                                    session.setAttribute("repitio", true);
+
                 %>
                 <script>
                     Swal.fire({
@@ -118,47 +127,52 @@
                     });
                 </script>
 
+                <% }%>
+
                 <form action="solicitud_adopcion.jsp" method="get">
                     <input type="hidden" name="Mascota"
                            value="<%= mascota.getPk_mascota()%>">
                     <button type="submit" class="tarjeta-boton">
                         <div class="tarjeta">
-                             <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
-                                                                    ? mascota.getImagen()
-                                                                    : " IMAGENES/default.png"%>"
-                             alt="<%= mascota.getNombre()%>"
-                             class="imagen-mascota">
+                            <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
+                                    ? mascota.getImagen()
+                                    : " IMAGENES/default.png"%>"
+                                 alt="<%= mascota.getNombre()%>"
+                                 class="imagen-mascota">
 
-                        <div class="contenido-tarjeta">
-                            <h3><%= mascota.getNombre()%></h3>
-                            <p><strong>Edad:</strong> <%= mascota.getEdad()%> años</p>
-                            <p><strong>Sexo:</strong> <%= mascota.getSexo()%></p>
-                            <p><strong>Descripción:</strong> <%= mascota.getDescripcion()%></p>
-                            <p><strong>Estado:</strong> <%= mascota.getEstado()%></p>
+                            <div class="contenido-tarjeta">
+                                <h3><%= mascota.getNombre()%></h3>
+                                <p><strong>Edad:</strong> <%= mascota.getEdad()%> años</p>
+                                <p><strong>Sexo:</strong> <%= mascota.getSexo()%></p>
+                                <p><strong>Descripción:</strong> <%= mascota.getDescripcion()%></p>
+                                <p><strong>Estado:</strong> <%= mascota.getEstado()%></p>
+                            </div>
                         </div>
-                    </div>
-                </button>
-            </form>
-            <%
-            } else if ("Administrador".equals(tipo)) {
-            %>
-            <script>
-                Swal.fire({
-                    title: '¡Bienvenido Administrador!',
-                    text: 'Se ha logueado correctamente 😎',
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                });
-            </script>
-            <form action="ModificarMascotaServlet" method="GET">
-                <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota()%>">
-                <button type="submit" class="tarjeta-boton">
-                    <div class="tarjeta">
-                        <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
-                                ? mascota.getImagen()
-                                : "IMAGENES/default.png"%>" 
-                             alt="<%= mascota.getNombre()%>" 
-                             class="imagen-mascota">
+                    </button>
+                </form>
+                <%
+                } else if ("Administrador".equals(tipo)) {
+                    if (Boolean.FALSE.equals(session.getAttribute("repitio"))) {
+                        session.setAttribute("repitio", true);
+                %>
+                <script>
+                    Swal.fire({
+                        title: '¡Bienvenido Administrador!',
+                        text: 'Se ha logueado correctamente 😎',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                </script>
+                <% }%>
+                <form action="ModificarMascotaServlet" method="GET">
+                    <input type="hidden" name="idMascota" value="<%= mascota.getPk_mascota()%>">
+                    <button type="submit" class="tarjeta-boton">
+                        <div class="tarjeta">
+                            <img src="<%= (mascota.getImagen() != null && !mascota.getImagen().isEmpty())
+                                    ? mascota.getImagen()
+                                    : "IMAGENES/default.png"%>" 
+                                 alt="<%= mascota.getNombre()%>" 
+                                 class="imagen-mascota">
 
                             <div class="contenido-tarjeta">
                                 <h3>
@@ -181,8 +195,8 @@
                     </button>
                 </form>
                 <% }
-                                                        }
-                                                    } else { %>
+                    }
+                } else { %>
                 <p>No hay mascotas disponibles en este momento.</p>
 
                 <% }%>

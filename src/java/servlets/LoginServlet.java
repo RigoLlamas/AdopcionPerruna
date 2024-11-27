@@ -116,7 +116,7 @@ public class LoginServlet extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
 
         UsuariosDAO usuarioDAO = new UsuariosDAO();
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();        
 
         try {
             String tipoUsuario = usuarioDAO.validarUsuario(email, contrasena);

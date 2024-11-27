@@ -184,8 +184,7 @@ public class MascotasDAO extends Adopciones {
                 mascota.setSexo(rs.getString("Sexo"));
                 mascota.setDescripcion(rs.getString("Descripcion"));
                 mascota.setEstado(rs.getString("Estado"));
-                mascota.setImagen(rs.getString("Imagen"));
-                // Agrega la mascota a la lista
+                mascota.setImagen(rs.getString("ImagenURL"));
                 listaMascotas.add(mascota);
             }
         } catch (Exception e) {
