@@ -20,11 +20,11 @@ public class MascotasDAO extends Adopciones {
         super();
     }
 
-    public void insert(Mascotas m) {
+    public boolean insert(Mascotas m) {
         try {
             PreparedStatement ps;
             ps = getConnection().prepareStatement(
-                    "INSERT INTO ´mascotas´ (Nombre, Edad, Sexo, Descripcion, FechaIngreso, FK_Categoria, Estado) VALUES "
+                    "INSERT INTO `mascotas` (Nombre, Edad, Sexo, Descripcion, FechaIngreso, FK_Categoria, Estado) VALUES "
                     + "(?, ?, ?, ?, ?, ?, ?)"
             );
             ps.setString(1, m.getNombre());
@@ -35,10 +35,10 @@ public class MascotasDAO extends Adopciones {
             ps.setInt(6, m.getFk_categoria());
             ps.setString(7, m.getEstado());
             ps.execute();
-            System.out.println("Mascota insertada correctamente.");
         } catch (Exception e) {
-            System.err.println("Error al insertar mascota: " + e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public ArrayList<Mascotas> select() {
